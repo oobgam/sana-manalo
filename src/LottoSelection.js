@@ -19,19 +19,21 @@ const Container = styled.div`
     width: 100%;
     align-items: flex-start;
     justify-content: space-between;
-
+    flex-wrap: wrap;
     padding: 0.5rem;
 `;
 
 const ImageContainer = styled.div`
     border-radius: 4px;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-    height: 5rem;
-    width: 5rem;
+    height: 4rem;
+    width: 100%;
     background-size: 90%;
     background-image: url(${p => p.img});
     background-repeat: no-repeat;
     background-position: center;
+    flex-shrink: 0;
+    background-color: white;
 `;
 
 const LottoSelectionContainer = styled.label`
@@ -41,8 +43,11 @@ const LottoSelectionContainer = styled.label`
     flex-direction: column;
     cursor: pointer;
     padding: 0.5rem;
+    flex-grow: 0;
+    width: 20%;
+    min-width: 5rem;
 
-    opacity: ${p => p.isChecked ? '1' : '0.3'};
+    opacity: ${p => p.isChecked ? '1' : '0.4'};
 
     input {
         display: none;

@@ -7,10 +7,12 @@ import getLottoType, {
     MEGA_LOTTO,
     LOTTO,
 } from './getLottoType';
-import { Button } from './Buttons';
 import { ThemeProvider } from 'styled-components';
-import { theme, GlobalStyle, AppContainer } from './AppStyle';
+import { theme, GlobalStyle, AppContainer, Header } from './AppStyle';
 import LottoSelection from './LottoSelection';
+import NumberDisplay from './NumberDisplay';
+import { IconButton } from './Buttons';
+import { FiHelpCircle } from 'react-icons/fi'
 
 function generateLottoNumbers({ len = 6, max = 52, canRepeat = false }) {
     return range(len).reduce((acc, cur) => {
@@ -51,12 +53,12 @@ class App extends Component {
             <ThemeProvider theme={theme}>
                 <Fragment>
                     <GlobalStyle />
+                    <Header>
+                        <strong>Lotto Random Number Generator</strong>
+                        <IconButton><FiHelpCircle size="1rem"/></IconButton>
+                    </Header>
                     <AppContainer>
-                        {numbers.length ? (
-                            numbers.join(', ')
-                        ) : (
-                            <div>Generate now</div>
-                        )}
+                        <NumberDisplay numbers={numbers} />
                         <LottoSelection
                             values={[
                                 ULTRA_LOTTO,
