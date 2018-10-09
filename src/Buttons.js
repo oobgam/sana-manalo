@@ -9,9 +9,9 @@ const BaseButton = styled.button`
 `
 
 export const IconButton = styled(BaseButton)`
-    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.25rem;
+    color: ${p => p.inverted ? p.theme.primary : 'white'};
 `

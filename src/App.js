@@ -13,6 +13,7 @@ import LottoSelection from './LottoSelection';
 import NumberDisplay from './NumberDisplay';
 import { IconButton } from './Buttons';
 import { FiHelpCircle } from 'react-icons/fi';
+import Modal from './Modal';
 
 function generateLottoNumbers({ len = 6, max = 52, canRepeat = false }) {
     return range(len).reduce((acc, cur) => {
@@ -29,6 +30,7 @@ class App extends Component {
     state = {
         numbers: [],
         lottoType: '',
+        showModal: false
     };
 
     generateNumber() {
@@ -36,6 +38,14 @@ class App extends Component {
         this.setState({
             numbers: generateLottoNumbers(getLottoType(lottoType)),
         });
+    }
+
+    toggleAbout() {
+        this.setState({showModal: !this.state.showModal});
+    }
+
+    closeModal() {
+        this.setState({showModal: false});
     }
 
     changeLottoType(e) {
@@ -48,14 +58,14 @@ class App extends Component {
     }
 
     render() {
-        const { numbers, lottoType } = this.state;
+        const { numbers, lottoType, showModal } = this.state;
         return (
             <ThemeProvider theme={theme}>
                 <Fragment>
-                    <GlobalStyle />
+                    <GlobalStyle showModal={showModal}/>
                     <Header>
                         <strong>Sana Manalo</strong>
-                        <IconButton><FiHelpCircle size="1rem"/></IconButton>
+                        <IconButton onClick={this.toggleAbout.bind(this)}><FiHelpCircle size="1rem"/></IconButton>
                     </Header>
                     <AppContainer>
                         <NumberDisplay numbers={numbers}/>
@@ -73,6 +83,7 @@ class App extends Component {
                             onChange={this.changeLottoType.bind(this)}
                         />
                     </AppContainer>
+                    { showModal && <Modal closeModal={this.closeModal.bind(this)}/> }
                 </Fragment>
             </ThemeProvider>
         );
