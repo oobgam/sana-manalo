@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { fill } from 'lodash';
 
@@ -35,7 +35,7 @@ const NumberDisplay = styled.span`
 
 const emptyValues = fill(Array(6), '-');
 
-export default ({numbers}) => {
+export default ({numbers, generateNumber}) => {
     const displayValues = numbers.length ? numbers : emptyValues;
     return <Container>
         {displayValues.map( (n,i) => <NumberDisplay key={i}>{n}</NumberDisplay> )}

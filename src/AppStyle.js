@@ -33,7 +33,7 @@ export const AppContainer = styled.div`
     margin-right: auto;
 
     background-color: #f2f2f2;
-    min-height: calc(100vh - 26px);
+    min-height: calc(100vh - 32px);
 `
 
 export const Header = styled.header`

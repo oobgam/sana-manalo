@@ -54,7 +54,7 @@ const LottoSelectionContainer = styled.label`
     }
 `;
 
-export const LottoSelection = ({ value, onChange, name, selectedValue }) => (
+export const LottoSelection = ({ value, onChange, name, selectedValue, onClick }) => (
     <LottoSelectionContainer
         htmlFor={`${name}-${value}`}
         isChecked={value === selectedValue}>
@@ -62,6 +62,7 @@ export const LottoSelection = ({ value, onChange, name, selectedValue }) => (
             name={name}
             id={`${name}-${value}`}
             type="radio"
+            onClick={value === selectedValue ? onClick : null}
             onChange={onChange}
             value={value}
         />

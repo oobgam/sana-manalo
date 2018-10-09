@@ -12,7 +12,7 @@ import { theme, GlobalStyle, AppContainer, Header } from './AppStyle';
 import LottoSelection from './LottoSelection';
 import NumberDisplay from './NumberDisplay';
 import { IconButton } from './Buttons';
-import { FiHelpCircle } from 'react-icons/fi'
+import { FiHelpCircle } from 'react-icons/fi';
 
 function generateLottoNumbers({ len = 6, max = 52, canRepeat = false }) {
     return range(len).reduce((acc, cur) => {
@@ -54,11 +54,11 @@ class App extends Component {
                 <Fragment>
                     <GlobalStyle />
                     <Header>
-                        <strong>Lotto Random Number Generator</strong>
+                        <strong>Sana Manalo</strong>
                         <IconButton><FiHelpCircle size="1rem"/></IconButton>
                     </Header>
                     <AppContainer>
-                        <NumberDisplay numbers={numbers} />
+                        <NumberDisplay numbers={numbers}/>
                         <LottoSelection
                             values={[
                                 ULTRA_LOTTO,
@@ -69,6 +69,7 @@ class App extends Component {
                             ]}
                             name="lottoType"
                             selectedValue={lottoType}
+                            onClick={this.generateNumber.bind(this)}
                             onChange={this.changeLottoType.bind(this)}
                         />
                     </AppContainer>
