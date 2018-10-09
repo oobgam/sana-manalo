@@ -1,7 +1,7 @@
 {
   "name": "lotto-generator",
   "version": "0.1.0",
-  "homepage": "https://oobgam.github.io",
+  "homepage": "https://oobgam.github.io/sana-manalo",
   "private": true,
   "dependencies": {
     "gh-pages": "^2.0.1",
