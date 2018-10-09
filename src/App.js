@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { random, range } from 'lodash';
 import getLottoType, {
     ULTRA_LOTTO,
@@ -7,6 +7,10 @@ import getLottoType, {
     MEGA_LOTTO,
     LOTTO,
 } from './getLottoType';
+import { Button } from './Buttons';
+import { ThemeProvider } from 'styled-components';
+import { theme, GlobalStyle, AppContainer } from './AppStyle';
+import LottoSelection from './LottoSelection';
 
 function generateLottoNumbers({ len = 6, max = 52, canRepeat = false }) {
     return range(len).reduce((acc, cur) => {
@@ -22,38 +26,52 @@ function generateLottoNumbers({ len = 6, max = 52, canRepeat = false }) {
 class App extends Component {
     state = {
         numbers: [],
-        lottoType: ULTRA_LOTTO,
+        lottoType: '',
     };
 
     generateNumber() {
         const { lottoType } = this.state;
-        this.setState({ numbers:  generateLottoNumbers(getLottoType(lottoType))});
+        this.setState({
+            numbers: generateLottoNumbers(getLottoType(lottoType)),
+        });
     }
 
     changeLottoType(e) {
-        this.setState({ lottoType: e.target.value });
+        const { value } = e.target;
+        const lottoTypeObject = getLottoType(value);
+        this.setState({
+            lottoType: value,
+            numbers: generateLottoNumbers(lottoTypeObject),
+        });
     }
 
     render() {
         const { numbers, lottoType } = this.state;
         return (
-            <div className="App">
-                {numbers.length ? numbers.join(', ') : <div>Generate now</div>}
-                <button onClick={this.generateNumber.bind(this)}>Draw</button>
-                <select onChange={this.changeLottoType.bind(this)}>
-                    {[
-                        ULTRA_LOTTO,
-                        GRAND_LOTTO,
-                        SUPER_LOTTO,
-                        MEGA_LOTTO,
-                        LOTTO,
-                    ].map((type, i) => (
-                        <option key={i} value={type}>
-                            {type}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <ThemeProvider theme={theme}>
+                <Fragment>
+                    <GlobalStyle />
+                    <AppContainer>
+                        {numbers.length ? (
+                            numbers.join(', ')
+                        ) : (
+                            <div>Generate now</div>
+                        )}
+                        <LottoSelection
+                            values={[
+                                ULTRA_LOTTO,
+                                GRAND_LOTTO,
+                                SUPER_LOTTO,
+                                MEGA_LOTTO,
+                                LOTTO,
+                            ]}
+                            name="lottoType"
+                            selectedValue={lottoType}
+                            onChange={this.changeLottoType.bind(this)}
+                        />
+                    </AppContainer>
+                </Fragment>
+            </ThemeProvider>
         );
     }
 }
